@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Hash;
 
 use App\Filament\Resources\UserResource\Pages\CreateRecord;
 
+use App\Enums\ServiceProviderStatus;
+
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
@@ -68,9 +70,26 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('roles.name'),
+                Tables\Columns\SelectColumn::make('service_status')
+                    ->options(ServiceProviderStatus::class)
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
+                    ->searchable(),
+                Tables\Columns\ImageColumn::make('image_path')
+                    ->getStateUsing( function (User $record){
+                            
+                        if ($record->image_path != '') {
+                            return $record->getImagePath();
+                        }
+
+                        // return $record->getImagePath();
+                        
+                    })
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('phone')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email_verified_at')
                     ->dateTime()
