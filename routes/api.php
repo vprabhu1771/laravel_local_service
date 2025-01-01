@@ -39,3 +39,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/submit-appointment', [AppointmentController::class, 'store']);
 
 });
+
+use App\Http\Controllers\api\v2\NotificationController;
+
+Route::get('/notifications', [NotificationController::class, 'index']);
