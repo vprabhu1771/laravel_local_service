@@ -4,6 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use App\Enums\Gender;
+use App\Enums\Religion;
+use App\Enums\Caste;
+use App\Enums\ServiceProviderStatus;
+
 return new class extends Migration
 {
     /**
@@ -18,6 +23,19 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+
+            $table->string('image_path')->nullable();
+
+            $table->string('phone')->nullable();
+
+            $table->string('gender')->default(Gender::MALE)->nullable();
+
+            $table->string('religion')->default(Religion::HINDU)->nullable();
+
+            $table->string('caste')->default(Caste::SC_ST)->nullable();
+
+            $table->string('service_status')->default(ServiceProviderStatus::NotAvailable)->nullable();
+            
             $table->timestamps();
         });
 
