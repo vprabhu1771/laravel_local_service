@@ -14,6 +14,13 @@ use App\Http\Controllers\api\v2\CategoryController;
 Route::get('/categories', [CategoryController::class, 'index']);
 
 
+use App\Http\Controllers\api\v2\ServiceController;
+
+Route::get('/services', [ServiceController::class, 'index']);
+
+Route::get('/services/filter', [ServiceController::class, 'filterByServiceProvider']);
+
+
 use App\Http\Controllers\api\v2\AuthController;
 
 Route::post('/register', [AuthController::class, 'register']);
