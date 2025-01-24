@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Support\Facades\Storage;
+
 class Category extends Model
 {
     use HasFactory;
@@ -26,9 +28,13 @@ class Category extends Model
         
         // $basePath = config('app.url') . '/storage/';
 
-        $basePath = env('APP_URL') . '/storage/';        
+        // $basePath = env('APP_URL') . '/storage/';        
 
-        return $basePath . $iconPath;
+        // return $basePath . $iconPath;
+
+        // OR
+
+        return env('DOMAIN_URL') . Storage::url($iconPath);
     }
 
     // Define relationship with services
