@@ -22,7 +22,7 @@ return new class extends Migration
 
             $table->unsignedBigInteger('category_id')->nullable();
 
-            $table->unsignedBigInteger('provider_id')->nullable();
+            $table->unsignedBigInteger('service_provider_id')->nullable();
 
             $table->string('availability_status')->default(AvailabilityStatus::Available)->nullable();
             

@@ -44,7 +44,7 @@ class UserResource extends Resource
                         ->required()
                         ->unique(ignoreRecord: true),
                     // DateTimePicker::make('email_verified_at'),
-                    
+                    Forms\Components\TextInput::make('phone'),
                         
                 ]),
                 Forms\Components\Section::make('User New Password')->schema([
