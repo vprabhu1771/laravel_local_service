@@ -23,9 +23,8 @@ class CategoryResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('icon_path')
-                    ->maxLength(255)
-                    ->default(null),
+                Forms\Components\FileUpload::make('icon_path')
+                    ->directory('category'),
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
@@ -38,7 +37,7 @@ class CategoryResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('icon_path')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('name')
+                Tables\Columns\TextInputColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
