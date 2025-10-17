@@ -15,9 +15,34 @@ class AppointmentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        try {
+            $user = $request->user();
+
+            // Retrieve appointments with the service provider relationship
+            $appointments = Appointment::with('serviceProvider')
+                ->where('customer_id', $user->id)
+                ->get();
+
+            // Transform the appointment data
+            $transformedData = $appointments->map(function ($row) {
+                return [
+                    'id' => $row->id,
+                    'name' => $row->serviceProvider->name ?? 'N/A',
+                    'appointment_date' => $row->appointment_date,
+                    'appointment_time' => $row->appointment_time,
+                    'status' => $row->status,
+                ];
+            });
+
+            return response()->json(['data' => $transformedData], 200);
+
+        } catch (ValidationException $e) {
+            return response()->json(['error' => $e->validator->errors()], 422);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 
     /**

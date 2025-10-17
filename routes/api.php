@@ -43,6 +43,8 @@ use App\Http\Controllers\api\v2\AppointmentController;
 
 Route::middleware(['auth:sanctum'])->group(function () {
 
+    Route::get('/my-appointments', [AppointmentController::class, 'index']);
+
     Route::post('/submit-appointment', [AppointmentController::class, 'store']);
 
 });
